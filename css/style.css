@@ -1,0 +1,63 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+:root{
+    --rojo:#89375F;
+    --azul:#BACDDB;
+    --lila:#F3E8FF;
+    --colorPrimario:#F6F5F2;
+    --colorSecundario:#F0EBE3;
+    --colorTerciario:#C39898;
+    --colorBox:#DBB5B5;
+}
+body{
+    background-color: var(--colorSecundario);
+}
+.container .box_tareas .box_guardar{
+    background-color: var(--colorPrimario);
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 50px;
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border:2px solid var(--colorTerciario);
+    border-bottom: none;
+
+    & select, input{
+        height: auto;
+        padding: 8px 7px;
+        border: 1px solid var(--colorBox);
+        color: var(--rojo);
+        border-radius: 5px;
+    }
+}
+.container .box_tareas .box_buscar{
+    background-color: var(--colorPrimario);
+    max-width: 800px;
+    margin: 0 auto;
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border:2px solid var(--colorTerciario);
+
+    & select, input{
+        height: auto;
+        padding: 8px 7px;
+        border: 1px solid var(--colorBox);
+        color: var(--rojo);
+        border-radius: 5px;
+
+    }
+}
+.container .box_tareas .tareas{
+    background-color: var(--colorTerciario);
+    max-width: 800px;
+    margin: 0 auto;
+    min-height: 400px;
+}
