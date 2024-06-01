@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@400..700&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -15,6 +18,10 @@
 }
 body{
     background-color: var(--colorSecundario);
+    font-family: "Domine", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
 }
 .container .box_tareas .box_guardar{
     background-color: var(--colorPrimario);
@@ -22,18 +29,25 @@ body{
     margin: 0 auto;
     margin-top: 50px;
     height: 100px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
     border:2px solid var(--colorTerciario);
     border-bottom: none;
-
+    display: grid;
+    
+    & h2.guardar_titulo{ 
+        margin: 0 auto;
+    }
+    & .box_guardar_opc{
+       display: flex;
+       justify-content: space-around;
+       align-items: center;
+    }
     & select, input{
         height: auto;
         padding: 8px 7px;
         border: 1px solid var(--colorBox);
         color: var(--rojo);
         border-radius: 5px;
+        
     }
 }
 .container .box_tareas .box_buscar{
