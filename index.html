@@ -14,7 +14,7 @@
                 
                 <h2 class="guardar_titulo">AGREGAR UNA NUVA TAREA</h2>
                 
-                <div class="box_guardar_opc">
+                <form class="box_guardar_opc">
                     <select name="prioridad" id="prioridad">
                         <option value="elegir">Elegir una prioridad</option>
                         <option value="urgente">Urgente</option>
@@ -22,8 +22,8 @@
                         <option value="mensual">Mensual</option>
                     </select>
                     <input type="text" name="guardar_tarea" id="guardar_tarea">
-                    <input type="submit" value="Guardar">
-                </div>
+                    <input type="submit" value="Guardar" id="btn_guardar">
+                </form>
             </div>
             <div class="box_buscar">
                 <select name="prioridad" id="prioridad_buscar">
@@ -35,7 +35,9 @@
                 </select>
             </div>
             <div class="tareas">
+                <ul class="lista_tareas">
 
+                </ul>
             </div>
         </div>
     </div>
