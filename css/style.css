@@ -75,3 +75,12 @@ body{
     margin: 0 auto;
     min-height: 400px;
 }
+.container .tareas ul.lista_tareas{
+    padding: 30px;
+    text-decoration: none;
+    
+    & li{
+        margin: 20px 0;
+    }
+   
+}
