@@ -84,3 +84,14 @@ body{
     }
    
 }
+li{
+    display: flex;
+    justify-content: space-between;
+    & button{
+        display: inline-block;
+        background-color: #DBB5B5;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 2px solid var(--rojo);
+    }
+}

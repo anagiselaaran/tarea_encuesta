@@ -6,62 +6,86 @@ const btnGuardar = document.querySelector('#btn_guardar')
 
 form.addEventListener('submit',agregarTareas)
 
-const tareas = []
+const nuevasTareas = []
+let id = 0
 
 function agregarTareas(event){
     event.preventDefault()
     const prioridad = event.target.prioridad.value;
     const tarea = event.target.guardar_tarea.value;
+   
+    const newTarea = {
+        idTarea : id,
+        titulo : tarea,
+        prioridad: prioridad
+    }
+    
     if(tarea === "" || prioridad === ""){
-         
-        ulTareas.innerHTML = ""
         ulTareas.textContent = "INTRODUCIR TAREAS"
         setTimeout(()=>{
             ulTareas.innerHTML = ""
         },3000)
     }else{
-
-        const mitarea = {
-            titulo : tarea,
-            prioridad:prioridad
-        }
-
-        tareas.push(mitarea)
-        pintarTarea(tarea,ulTareas)
+        nuevasTareas.push(newTarea)
+        id++
+        pintarTarea(tarea, ulTareas)
     }
-    console.log(tareas);
+    console.log(nuevasTareas);
+    console.log(newTarea.idTarea);
     form.reset();
+    }
 
-}
+
 function pintarTarea(tarea,domElement){
     const liTarea = document.createElement('li')
     liTarea.textContent = tarea;
+    liTarea.dataset.id = id;
+    const btneliminar = document.createElement('button')
+    btneliminar.textContent = 'Eliminar'
+    
+    btneliminar.addEventListener('click', eliminarTarea)
+    liTarea.appendChild(btneliminar)
     domElement.appendChild(liTarea)  
 }
 
+function eliminarTarea(event) {
+    const li = event.target.parentNode;
+    console.log(li);
+    const id = li.dataset.id;
+    console.log(id);
+    let posicion = nuevasTareas.findIndex(tarea => tarea.idTarea === id -1);
+    console.log(posicion)
+    if (posicion !== -1) {
+        // Borramos del array
+        nuevasTareas.splice(posicion, 1);
+        console.log(nuevasTareas)
+        // Borra físicamente el objeto del HTML
+        li.remove();
+    }
+}
 //separamos por busqueda
 const selectBuscar = document.querySelector('#prioridad_buscar');
 
 selectBuscar.addEventListener('change',buscar)
 function buscar(event){
     let prioridad = selectBuscar.value
-    let filtradas = tareas
+    let filtradas = nuevasTareas
     if(prioridad !== ""){
-        filtradas = tareas.filter(tarea => tarea.prioridad === prioridad)
+        filtradas = nuevasTareas.filter(tarea => tarea.prioridad === prioridad)
         console.log(filtradas);
         pintarLasTareas(filtradas)
     }
 }
-function pintarLasTareas(filtradas){
+function pintarLasTareas(lista){
     ulTareas.innerHTML = "";
-    filtradas.forEach(tarea=>pintarTarea(tarea.titulo,ulTareas))
+    lista.forEach(tarea=>pintarTarea(tarea.titulo,ulTareas))
 }
 const buscarPorPalabra = document.querySelector('#buscar_tarea');
-buscarPorPalabra.addEventListener('change', spelling)
+buscarPorPalabra.addEventListener('input', spelling)
 function spelling(event){
     //ulTareas.innerHTML = "";
     const laPalabra = event.target.value.trim();
-    const palabraFiltrada = tareas.filter(tarea => tarea.titulo.toLowerCase().includes(laPalabra))
+    const palabraFiltrada = nuevasTareas.filter(tarea => tarea.titulo.toLowerCase().includes(laPalabra))
 
     pintarLasTareas(palabraFiltrada)
     /* let filtradas = palabraFiltrada.forEach(tarea => tarea.titulo.includes(laPalabra))
@@ -75,21 +99,6 @@ function spelling(event){
 
 
 
-
-/* function filtrar(lista,prioridad){
-    return lista.filter(tarea=>tarea.prioridad === prioridad)
-}
-
-function pintarTodas(lista,domElement){
-    lista.foreach(tarea=>pintarTarea(tarea,domElement))
-}
-function buscar(event){
-    event.preventDefault()
-    let prioridad = event.target.value;
-    console.log(prioridad);
-    const filtrados = filtrar(tareas,prioridad)
-    pintarTodas(filtrados,ulTareas)
-} */
 
 
 
