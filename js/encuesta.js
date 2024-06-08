@@ -35,6 +35,9 @@ function agregarTareas(event){
     form.reset();
     }
 
+function clasificar(tarea, prioridad) {
+    
+}
 
 function pintarTarea(tarea,domElement){
     const liTarea = document.createElement('li')
@@ -42,6 +45,20 @@ function pintarTarea(tarea,domElement){
     liTarea.dataset.id = id;
     const btneliminar = document.createElement('button')
     btneliminar.textContent = 'Eliminar'
+    const clase = prioridad.value
+   console.log(clase);
+   switch (clase) {
+    case 'urgente':
+        liTarea.style.color = '#89375F'
+        break;
+       case 'diaria':
+           liTarea.style.color = '#BACDDB'
+           break;
+       case 'mensual':
+           liTarea.style.color = '#F3E8FF'
+    default:
+        break;
+   }
     
     btneliminar.addEventListener('click', eliminarTarea)
     liTarea.appendChild(btneliminar)
