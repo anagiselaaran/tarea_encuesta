@@ -29,15 +29,13 @@ function agregarTareas(event){
         nuevasTareas.push(newTarea)
         id++
         pintarTarea(tarea, ulTareas)
+        localStorage.setItem('nuevasTareas' ,JSON.stringify(nuevasTareas))
     }
     console.log(nuevasTareas);
     console.log(newTarea.idTarea);
     form.reset();
     }
 
-function clasificar(tarea, prioridad) {
-    
-}
 
 function pintarTarea(tarea,domElement){
     const liTarea = document.createElement('li')
@@ -49,15 +47,14 @@ function pintarTarea(tarea,domElement){
    console.log(clase);
    switch (clase) {
     case 'urgente':
-        liTarea.style.color = '#89375F'
+        liTarea.classList.add('urgente')
         break;
        case 'diaria':
-           liTarea.style.color = '#BACDDB'
+           liTarea.classList.add('diaria')
            break;
        case 'mensual':
-           liTarea.style.color = '#F3E8FF'
-    default:
-        break;
+           liTarea.classList.add('mensual')
+            break;
    }
     
     btneliminar.addEventListener('click', eliminarTarea)
@@ -67,17 +64,13 @@ function pintarTarea(tarea,domElement){
 
 function eliminarTarea(event) {
     const li = event.target.parentNode;
-    console.log(li);
     const id = li.dataset.id;
-    console.log(id);
     let posicion = nuevasTareas.findIndex(tarea => tarea.idTarea === id -1);
     console.log(posicion)
     if (posicion !== -1) {
-        // Borramos del array
         nuevasTareas.splice(posicion, 1);
-        console.log(nuevasTareas)
-        // Borra físicamente el objeto del HTML
         li.remove();
+        localStorage.setItem('nuevasTareas' ,JSON.stringify(nuevasTareas))
     }
 }
 //separamos por busqueda
@@ -86,31 +79,45 @@ const selectBuscar = document.querySelector('#prioridad_buscar');
 selectBuscar.addEventListener('change',buscar)
 function buscar(event){
     let prioridad = selectBuscar.value
-    let filtradas = nuevasTareas
     if(prioridad !== ""){
-        filtradas = nuevasTareas.filter(tarea => tarea.prioridad === prioridad)
+       let filtradas = nuevasTareas.filter(tarea => tarea.prioridad === prioridad)
         console.log(filtradas);
-        pintarLasTareas(filtradas)
+        pintarLasTareas(filtradas, ulTareas)
+        
+    } else {
+        pintarLasTareas(nuevasTareas,ulTareas)
     }
 }
-function pintarLasTareas(lista){
-    ulTareas.innerHTML = "";
+function pintarLasTareas(lista,domElement){
+    domElement.innerHTML = "";
     lista.forEach(tarea=>pintarTarea(tarea.titulo,ulTareas))
 }
 const buscarPorPalabra = document.querySelector('#buscar_tarea');
 buscarPorPalabra.addEventListener('input', spelling)
-function spelling(event){
+
+function spelling(event) {
+    console.log(event.target.value);
     //ulTareas.innerHTML = "";
-    const laPalabra = event.target.value.trim();
+    const laPalabra = event.target.value;
     const palabraFiltrada = nuevasTareas.filter(tarea => tarea.titulo.toLowerCase().includes(laPalabra))
+    console.log(palabraFiltrada);
 
-    pintarLasTareas(palabraFiltrada)
-    /* let filtradas = palabraFiltrada.forEach(tarea => tarea.titulo.includes(laPalabra))
-    console.log(filtradas) */
-
-  
-
+    pintarLasTareas(palabraFiltrada,ulTareas)
+    
 }
+
+
+//LAS TAREAS VIEJAS SE ME GUARDAN DOS VECES SI APRETO EL BOTON PERO LAS MUESTRA UNA :(
+/* const tareasViejasbtn = document.querySelector('#tareasViejas')
+tareasViejasbtn.addEventListener('click', init) */
+
+/* function init() {
+     if (localStorage.getItem('nuevasTareas')) {
+        //pinto lo que hay en el localstorage
+        nuevasTareas.push(...JSON.parse(localStorage.getItem('nuevasTareas')))
+    }
+    pintarLasTareas(nuevasTareas, ulTareas);
+} */
 
 
 
