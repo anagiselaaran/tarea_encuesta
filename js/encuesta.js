@@ -75,8 +75,8 @@ function eliminarTarea(event) {
 }
 //separamos por busqueda
 const selectBuscar = document.querySelector('#prioridad_buscar');
-
 selectBuscar.addEventListener('change',buscar)
+
 function buscar(event){
     let prioridad = selectBuscar.value
     if(prioridad !== ""){
@@ -85,7 +85,7 @@ function buscar(event){
         pintarLasTareas(filtradas, ulTareas)
         
     } else {
-        pintarLasTareas(nuevasTareas,ulTareas)
+        pintarLasTareas(nuevasTareas,ulTareas)//===========
     }
 }
 function pintarLasTareas(lista,domElement){
@@ -108,16 +108,19 @@ function spelling(event) {
 
 
 //LAS TAREAS VIEJAS SE ME GUARDAN DOS VECES SI APRETO EL BOTON PERO LAS MUESTRA UNA :(
-/* const tareasViejasbtn = document.querySelector('#tareasViejas')
-tareasViejasbtn.addEventListener('click', init) */
+//me las acumula en el local storage solo si primero mustro las viejas y despues acumula las nuevas
+const tareasViejasbtn = document.querySelector('#tareasViejas')
+tareasViejasbtn.addEventListener('click', init) 
 
-/* function init() {
+function init() { 
+    
      if (localStorage.getItem('nuevasTareas')) {
         //pinto lo que hay en el localstorage
         nuevasTareas.push(...JSON.parse(localStorage.getItem('nuevasTareas')))
     }
     pintarLasTareas(nuevasTareas, ulTareas);
-} */
+   
+}
 
 
 
